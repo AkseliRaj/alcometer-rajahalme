@@ -1,8 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { ScrollView, TextInput, StyleSheet, Text, View, Button } from 'react-native';
+import { ScrollView, TextInput, StyleSheet, Text, View, Button, Pressable } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-import styles from  '/'
 
 
 export default function App() {
@@ -11,52 +10,58 @@ export default function App() {
   const [radioval, setRadioval] = useState('male');
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <Text style={styles.header}>Alcometer</Text>
-        <Text style={styles.label}>Weight</Text>
-        <TextInput
-          style={styles.weightLabel}
-        >
-        </TextInput>
-        <View>
-          <Text style={styles.label}>Bottles</Text>
-          <View>
-            <NumericInput
-              onChange={v => setValue(v)}
-              value={value}
-              rounded
-              borderColor='#272626'
-            />
+    <ScrollView>
+        <View style={styles.background}>
+          <Text style={styles.header}>Alcometer</Text>
+          <View style={styles.alcometerContainer}>
+            <Text style={styles.label}>Weight</Text>
+            <TextInput style={styles.weightLabel}>
+            </TextInput>
           </View>
-        </View>
         <View>
-          <Text style={styles.label}>Hours</Text>
-          <View>
-            <NumericInput
-              onChange={v => setValue(v)}
-              value={value}
-              rounded
-              borderColor='#272626'
-              iconStyle={{ color: 'white' }}
-            />
+        <View style={styles.alcometerContainer}>
+              <Text style={styles.label}>Bottles</Text>
+              <View>
+                <NumericInput
+                  onChange={v => setValue(v)}
+                  value={value}
+                  rounded
+                  borderColor='#ffffff'
+                  iconStyle={{ color: '#272626' }}
+                />
+              </View>
+            </View>
+            <View>
+              <Text style={styles.label}>Hours</Text>
+              <View>
+                <NumericInput
+                  onChange={v => setValue(v)}
+                  value={value}
+                  rounded
+                  borderColor='#ffffff'
+                  iconStyle={{ color: '#272626' }}
+                />
+              </View>
+            </View>
           </View>
-        </View>
 
-        
-        <Text>{radioval}</Text>
+            
+            <Text>{radioval}</Text>
 
-        <Button title='CALCULATE'></Button>
+            <Pressable
+            style={styles.button}>
+              <Text style={styles.buttonText}>Calculate</Text>
+            </Pressable>
 
-        <Text>8 PROMILLEA</Text>
-        <StatusBar style="auto" />
-      </ScrollView>
-    </View>
+            <Text>8 PROMILLEA</Text>
+            <StatusBar style="auto" />
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     paddingTop: 100,
     flex: 1,
     backgroundColor: '#fffafa',
@@ -64,15 +69,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+  alcometerContainer:{
+    backgroundColor: '#cfbeee',
+    borderRadius: 10,
+    padding: 35,
+  },
+
   header: {
     fontSize: 30,
-    color: '#e78080',
+    color: '#ffffff',
     fontFamily: 'Arial',
     fontWeight: 'bold',
+    textAlign: 'center'
   },
 
   label: {
-    color: '#e78080',
+    color: '#ffffff',
     fontFamily: 'Arial',
     fontWeight: 'bold',
     fontSize: 20,
@@ -80,14 +92,26 @@ const styles = StyleSheet.create({
   },
 
   weightLabel: {
-    borderWidth: 1,
+    
     padding: 10, 
     width: 250,
     backgroundColor: 'white',
     borderRadius: 10,
   },
 
-  numberInput: {
-    backgroundColor: '#272626',
-  }
+
+  //Button styling
+  button: {
+    padding: 13,
+    width: 200,
+    borderRadius: 15,
+    backgroundColor: "#b59ce0",
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    color:"#ffffff",
+    fontSize: 20,
+  },
 });
+

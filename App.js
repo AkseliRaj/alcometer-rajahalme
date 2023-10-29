@@ -4,23 +4,25 @@ import { ScrollView, TextInput, StyleSheet, Text, View, Button, Pressable } from
 import NumericInput from 'react-native-numeric-input';
 
 
+
+
 export default function App() {
 
   const [value, setValue] = useState(0);
   const [radioval, setRadioval] = useState('male');
 
   return (
-    <ScrollView>
+    <ScrollView >
         <View style={styles.background}>
-          <Text style={styles.header}>Alcometer</Text>
+          <Text style={[styles.text, styles.header,]}>Alcometer</Text>
           <View style={styles.alcometerContainer}>
-            <Text style={styles.label}>Weight</Text>
+            <Text style={[styles.text, styles.label]}>Weight</Text>
             <TextInput style={styles.weightLabel}>
             </TextInput>
           </View>
         <View>
         <View style={styles.alcometerContainer}>
-              <Text style={styles.label}>Bottles</Text>
+              <Text style={[styles.text, styles.label]}>Bottles</Text>
               <View>
                 <NumericInput
                   onChange={v => setValue(v)}
@@ -31,8 +33,8 @@ export default function App() {
                 />
               </View>
             </View>
-            <View>
-              <Text style={styles.label}>Hours</Text>
+            <View style={styles.alcometerContainer}>
+              <Text style={[styles.text, styles.label]}>Hours</Text>
               <View>
                 <NumericInput
                   onChange={v => setValue(v)}
@@ -45,15 +47,15 @@ export default function App() {
             </View>
           </View>
 
-            
-            <Text>{radioval}</Text>
-
+          
+          
+          
             <Pressable
             style={styles.button}>
               <Text style={styles.buttonText}>Calculate</Text>
             </Pressable>
 
-            <Text>8 PROMILLEA</Text>
+            <Text style={[styles.text, styles.calculationAnswer]}>8 PROMILLEA</Text>
             <StatusBar style="auto" />
       </View>
     </ScrollView>
@@ -61,12 +63,13 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  // Background & container styling
   background: {
+    backgroundColor: '#cfbeee',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingTop: 100,
     flex: 1,
-    backgroundColor: '#fffafa',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   alcometerContainer:{
@@ -75,24 +78,25 @@ const styles = StyleSheet.create({
     padding: 35,
   },
 
-  header: {
-    fontSize: 30,
+  // Text styling
+  text: {
     color: '#ffffff',
     fontFamily: 'Arial',
+    fontSize: 20,
+  },
+
+  header: {
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center'
   },
 
   label: {
-    color: '#ffffff',
-    fontFamily: 'Arial',
     fontWeight: 'bold',
-    fontSize: 20,
     marginBottom: 8,
   },
 
   weightLabel: {
-    
     padding: 10, 
     width: 250,
     backgroundColor: 'white',
@@ -112,6 +116,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color:"#ffffff",
     fontSize: 20,
+  },
+
+  calculationAnswer: {
+    fontWeight: 'bold',
+    fontSize: 25,
   },
 });
 

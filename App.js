@@ -58,12 +58,13 @@ export default function App() {
 
   return (
     <ScrollView >
-       <View style={styles.darkModeContainer}>
-        <Text style={styles.text}>Dark Mode</Text>
-        <Switch
-        />
-      </View>
+      <View style={styles.switchContainer}>
+          <Switch 
+          style={styles.switch}
+          />
+        </View>
         <View style={styles.background}>
+        
           <Text style={[styles.text, styles.header,]}>Alcometer</Text>
           <View style={styles.alcometerContainer}>
             <Text style={[styles.text, styles.label]}>Weight</Text>

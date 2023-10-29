@@ -7,15 +7,24 @@ export default StyleSheet.create({
     backgroundColor: '#cfbeee',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 100,
+    paddingTop: 60,
     flex: 1,
     padding: 80
   },
-
   alcometerContainer:{
     backgroundColor: '#cfbeee',
     borderRadius: 10,
     padding: 15,
+  },
+
+  // Switch styling
+  switchContainer: {
+    paddingTop: 70,
+    paddingLeft: 40,
+    backgroundColor: "#cfbeee",
+  },
+  switch: {
+    marginStart: 30,
   },
 
   // Text styling
@@ -24,26 +33,22 @@ export default StyleSheet.create({
     fontFamily: 'Arial',
     fontSize: 20,
   },
-
   header: {
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
   },
-
   label: {
     fontWeight: 'bold',
     marginBottom: 8,
   },
-
   weightLabel: {
     padding: 10, 
     width: 250,
     backgroundColor: 'white',
     borderRadius: 10,
   },
-
 
   //Button styling
   button: {

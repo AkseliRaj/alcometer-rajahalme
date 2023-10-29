@@ -10,13 +10,12 @@ export default function App() {
   // Radio buttons
   const [gender, setGender] = useState('Male')
 
-    // Value buttons
-    const [value, setValue] = useState(0);
-    const [radioval, setRadioval] = useState('male');
+  // Bottles and hours buttons
+  const [value, setValue] = useState(0);
 
-    const [selectedId, setSelectedId] = useState();
-
-    const [numericInput, setNumericInput] = useState('');
+  const [weightInput, setWeightInput] = useState('');
+  const [bottlesInput, setBottlesInput] = useState('');
+  const [hoursInput, setHoursInput] = useState('');
 
   return (
     <ScrollView >
@@ -28,6 +27,7 @@ export default function App() {
               style={styles.weightLabel}
               placeholder="Enter your weight"
               keyboardType="numeric"
+              onChangeText={(weight) => setWeightInput(weight)}
             />
           </View>
         <View>

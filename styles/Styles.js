@@ -12,6 +12,7 @@ export default StyleSheet.create({
     padding: 80
   },
   alcometerContainer:{
+    
     backgroundColor: '#cfbeee',
     borderRadius: 10,
     padding: 15,
@@ -77,6 +78,27 @@ export default StyleSheet.create({
     fontSize: 25,
     padding: 10,
     marginTop: 5
+  },
+
+  // Background & container styling for dark mode
+  darkModeBackground: {
+    backgroundColor: '#222',
+  },
+
+  darkModeSwitchActive: {
+    backgroundColor: '#2196F3',
+  },
+
+  darkModeSwitchInactive: {
+    backgroundColor: 'gray',
+  },
+
+  darkModeSwitchCircleActive: {
+    backgroundColor: '#FFFFFF',
+  },
+
+  darkModeSwitchCircleInactive: {
+    backgroundColor: '#000000',
   },
 });
   

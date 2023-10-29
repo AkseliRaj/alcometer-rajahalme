@@ -9,6 +9,17 @@ import { Switch } from 'react-native-switch';
 
 export default function App() {
 
+  // Switch darkmode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  // Result
+  const [result, setResult] = useState(0);
+
+
   // Radio buttons
   const [gender, setGender] = useState('Male')
 
@@ -29,13 +40,15 @@ export default function App() {
     };
   
     const handleHoursChange = (hours) => {
-      setHoursInput(hours);
+      setHoursInput(parseFloat(hours)); // Convert the input to a number
     };
+    
+    
 
   const calculate = () => {
     // Convert input values to numbers
     const weight = parseFloat(weightInput);
-    const bottles = value; // Using the state variable
+    const bottles = parseFloat(value);
     const hours = parseFloat(hoursInput);
   
     // Calculate the blood alcohol level
@@ -44,20 +57,24 @@ export default function App() {
     const burning = weight / 10;
     const gramsLeft = grams - burning * hours;
   
-    let result = 0;
+    let calculatedResult = 0;
   
     if (gender === 'Male') {
-      result = gramsLeft / (weight * 0.7);
+      calculatedResult = gramsLeft / (weight * 0.7);
     } else if (gender === 'Female') {
-      result = gramsLeft / (weight * 0.6);
+      calculatedResult = gramsLeft / (weight * 0.6);
     }
   
-    // Update the state to display the result
-    console.log(`Blood Alcohol Level: ${result.toFixed(2)} PROMILLEA`);
+    // Apply the conditional check to ensure the result is not negative
+    calculatedResult = Math.max(calculatedResult, 0);
+  
+    // Set the result in the state
+    setResult(calculatedResult.toFixed(2));
+
   };
 
   return (
-    <ScrollView >
+    <ScrollView>
       <View style={styles.switchContainer}>
           <Switch 
           style={styles.switch}
@@ -93,8 +110,8 @@ export default function App() {
               <Text style={[styles.text, styles.label]}>Hours</Text>
               <View>
                 <NumericInput
-                  onChange={v => setValue(v)}
-                  value={value}
+                  onChange={handleHoursChange} // Use the correct handler
+                  value={hoursInput} // Use the state variable
                   rounded
                   borderColor='#ffffff'
                   iconStyle={{ color: '#272626' }}
@@ -116,7 +133,9 @@ export default function App() {
             </View>
           </RadioButton.Group>
           </View>
-            <Text style={[styles.text, styles.calculationAnswer]}>8 PROMILLEA</Text>
+          <Text style={[styles.text, styles.calculationAnswer]}>
+            {result}
+          </Text>
             <Pressable
             style={styles.button}
             onPress={calculate}

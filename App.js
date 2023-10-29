@@ -1,15 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { ScrollView, TextInput, StyleSheet, Text, View, Button, Pressable } from 'react-native';
 import NumericInput from 'react-native-numeric-input';
-
-
-
+import { RadioButton } from 'react-native-paper';
+import RadioGroup from 'react-native-radio-buttons-group';
 
 export default function App() {
 
-  const [value, setValue] = useState(0);
-  const [radioval, setRadioval] = useState('male');
+  // Radio buttons
+  const [gender, setGender] = useState('Male')
+
+    // Value buttons
+    const [value, setValue] = useState(0);
+    const [radioval, setRadioval] = useState('male');
+
+    const [selectedId, setSelectedId] = useState();
+
+    const [numericInput, setNumericInput] = useState('');
 
   return (
     <ScrollView >
@@ -17,10 +24,14 @@ export default function App() {
           <Text style={[styles.text, styles.header,]}>Alcometer</Text>
           <View style={styles.alcometerContainer}>
             <Text style={[styles.text, styles.label]}>Weight</Text>
-            <TextInput style={styles.weightLabel}>
-            </TextInput>
+            <TextInput 
+              style={styles.weightLabel}
+              placeholder="Enter your weight"
+              keyboardType="numeric"
+            />
           </View>
         <View>
+
         <View style={styles.alcometerContainer}>
               <Text style={[styles.text, styles.label]}>Bottles</Text>
               <View>
@@ -47,12 +58,23 @@ export default function App() {
             </View>
           </View>
 
-          
-          
+          <View style={styles.alcometerContainer}>
+          <RadioButton.Group value={gender} onValueChange={g => setGender(g)}>
+            <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
+              <RadioButton value='Male'/>
+              <Text style={[styles.text, styles.radiobuttonText]}>Male</Text>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
+              <RadioButton 
+              value='Female'/>
+              <Text style={[styles.text, styles.radiobuttonText]}>Female</Text>
+            </View>
+          </RadioButton.Group>
+          </View>
           
             <Pressable
             style={styles.button}>
-              <Text style={styles.buttonText}>Calculate</Text>
+              <Text style={[styles.buttonText]}>Calculate</Text>
             </Pressable>
 
             <Text style={[styles.text, styles.calculationAnswer]}>8 PROMILLEA</Text>
@@ -118,9 +140,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 
+  radiobuttonText: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+
   calculationAnswer: {
     fontWeight: 'bold',
     fontSize: 25,
+    padding: 30,
   },
 });
 

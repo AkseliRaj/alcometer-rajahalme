@@ -4,6 +4,8 @@ import { ScrollView, TextInput, StyleSheet, Text, View, Button, Pressable } from
 import NumericInput from 'react-native-numeric-input';
 import { RadioButton } from 'react-native-paper';
 import RadioGroup from 'react-native-radio-buttons-group';
+import styles from './styles/Styles.js';
+import { Switch } from 'react-native-switch';
 
 export default function App() {
 
@@ -17,8 +19,50 @@ export default function App() {
   const [bottlesInput, setBottlesInput] = useState('');
   const [hoursInput, setHoursInput] = useState('');
 
+    // Update weight, bottles, and hours input values
+    const handleWeightChange = (weight) => {
+      setWeightInput(weight);
+    };
+  
+    const handleBottlesChange = (bottles) => {
+      setValue(bottles);
+    };
+  
+    const handleHoursChange = (hours) => {
+      setHoursInput(hours);
+    };
+
+  const calculate = () => {
+    // Convert input values to numbers
+    const weight = parseFloat(weightInput);
+    const bottles = value; // Using the state variable
+    const hours = parseFloat(hoursInput);
+  
+    // Calculate the blood alcohol level
+    const litres = bottles * 0.33;
+    const grams = litres * 8 * 4.5;
+    const burning = weight / 10;
+    const gramsLeft = grams - burning * hours;
+  
+    let result = 0;
+  
+    if (gender === 'Male') {
+      result = gramsLeft / (weight * 0.7);
+    } else if (gender === 'Female') {
+      result = gramsLeft / (weight * 0.6);
+    }
+  
+    // Update the state to display the result
+    console.log(`Blood Alcohol Level: ${result.toFixed(2)} PROMILLEA`);
+  };
+
   return (
     <ScrollView >
+       <View style={styles.darkModeContainer}>
+        <Text style={styles.text}>Dark Mode</Text>
+        <Switch
+        />
+      </View>
         <View style={styles.background}>
           <Text style={[styles.text, styles.header,]}>Alcometer</Text>
           <View style={styles.alcometerContainer}>
@@ -71,84 +115,16 @@ export default function App() {
             </View>
           </RadioButton.Group>
           </View>
-          
-            <Pressable
-            style={styles.button}>
-              <Text style={[styles.buttonText]}>Calculate</Text>
-            </Pressable>
-
             <Text style={[styles.text, styles.calculationAnswer]}>8 PROMILLEA</Text>
+            <Pressable
+            style={styles.button}
+            onPress={calculate}
+            >
+            <Text style={[styles.buttonText]}>Calculate</Text>
+            </Pressable>
             <StatusBar style="auto" />
       </View>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  // Background & container styling
-  background: {
-    backgroundColor: '#cfbeee',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 100,
-    flex: 1,
-  },
-
-  alcometerContainer:{
-    backgroundColor: '#cfbeee',
-    borderRadius: 10,
-    padding: 35,
-  },
-
-  // Text styling
-  text: {
-    color: '#ffffff',
-    fontFamily: 'Arial',
-    fontSize: 20,
-  },
-
-  header: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    textAlign: 'center'
-  },
-
-  label: {
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-
-  weightLabel: {
-    padding: 10, 
-    width: 250,
-    backgroundColor: 'white',
-    borderRadius: 10,
-  },
-
-
-  //Button styling
-  button: {
-    padding: 13,
-    width: 200,
-    borderRadius: 15,
-    backgroundColor: "#b59ce0",
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontWeight: 'bold',
-    color:"#ffffff",
-    fontSize: 20,
-  },
-
-  radiobuttonText: {
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
-
-  calculationAnswer: {
-    fontWeight: 'bold',
-    fontSize: 25,
-    padding: 30,
-  },
-});
 
